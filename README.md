@@ -202,8 +202,7 @@ service bind9 restart
 
 **Node Sadewa/Nakula**
 
-![image](https://github.com/lunielism/yes/assets/93961310/f5db2d21-317a-4f64-ad52-e8ee36deffa1)
-
+![image](https://github.com/lunielism/yes/assets/93961310/ad6851cf-879b-4264-8c86-1557a6f089e0)
 
 ```bash
 echo nameserver 192.168.122.1 > /etc/resolv.conf
@@ -212,14 +211,54 @@ apt-get install dnsutils
 echo nameserver 10.7.1.2 > /etc/resolv.conf
 ping arjuna.a16.com
 ```
+**Hasil**
 
-
-
-
-
+![image](https://github.com/lunielism/yes/assets/93961310/f5db2d21-317a-4f64-ad52-e8ee36deffa1)
 
 ## Soal 3
 Dengan cara yang sama seperti soal nomor 2, buatlah website utama dengan akses ke abimanyu.yyy.com dan alias www.abimanyu.yyy.com.
+
+**Node Yudhistira**
+
+![image](https://github.com/lunielism/yes/assets/93961310/6afb234a-dfd1-463b-a703-2670c2861da8)
+
+```bash
+echo 'zone "abimanyu.a16.com"{  
+        type master;
+        file "/etc/bind/arjuna/abimanyu.a16.com";
+};' >> /etc/bind/named.conf.local
+cp /etc/bind/db.local /etc/bind/arjuna/abimanyu.a16.com
+echo ';
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.a16.com. root.abimanyu.a16.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      abimanyu.a16.com.
+@       IN      A       10.7.3.3       ; IP Abimanyu 
+www     IN      CNAME   abimanyu.a16.com.
+@       IN      AAAA    ::1' > /etc/bind/arjuna/abimanyu.a16.com
+service bind9 restart
+```
+
+**Node Sadewa/Nakula**
+
+![image](https://github.com/lunielism/yes/assets/93961310/5ba0178a-d447-451f-b93f-1e77c0200a04)
+
+```bash
+echo nameserver 10.7.1.2 > /etc/resolv.conf
+host -t CNAME www.abimanyu.a16.com  
+ping www.abimanyu.a16.com -c 5
+```
+
+**Hasil**
+
+![image](https://github.com/lunielism/yes/assets/93961310/f4d68fe2-9ea2-4634-af8c-0346bf63c4b2)
 
 ## Soal 4
 Kemudian, karena terdapat beberapa web yang harus di-deploy, buatlah subdomain parikesit.abimanyu.yyy.com yang diatur DNS-nya di Yudhistira dan mengarah ke Abimanyu.
