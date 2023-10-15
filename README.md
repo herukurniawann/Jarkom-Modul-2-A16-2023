@@ -11,6 +11,70 @@
 ## Soal 1
 Yudhistira akan digunakan sebagai DNS Master, Werkudara sebagai DNS Slave, Arjuna merupakan Load Balancer yang terdiri dari beberapa Web Server yaitu Prabakusuma, Abimanyu, dan Wisanggeni. Buatlah topologi dengan pembagian sebagai berikut. Folder topologi dapat diakses pada drive berikut 
 
+**Penyelasaian Soal**
+Untuk membuat sebuah topologi yang diminta di soal, lakukan set up di GNS3 sampai muncul tampilan berikut
+
+![image](https://github.com/lunielism/yes/assets/93961310/37159adf-9d3c-4a8a-a623-f716bede812a)
+
+Kemudian salin alamat IP yang tertera yaitu 192.168.56.101 di browser google 
+kemudian akan terbuka tampilan dari GNS3 nya seperti gambar berikut : 
+
+![image](https://github.com/lunielism/yes/assets/93961310/56eadac0-1910-4424-8086-55de4a931ae9)
+
+Kemudian setelah terbuka tampilan GNS3 Seperti gambar di atas, selanjutnya membuat topologi dan sambungkan setiap masing-masing node dengan gambar yang di minta di soal. 
+Pada praktikkum kali ini kelompok saya mendapat topologi 1.
+
+![image](https://github.com/lunielism/yes/assets/93961310/4c1d046c-df7c-4af8-a1db-1349b8393c9a)
+
+Gunakan Fitur Changehostname untuk merubah setiap masing-masing node sesuai topologi gambar pada soal yang diminta, ketika sudah berhasil di ubah selanjutnya klik Applay.
+
+![image](https://github.com/lunielism/yes/assets/93961310/7ad85a6a-a744-4ad4-a442-9bf0526e41a4)
+
+Kemudian untuk merubah Symbol pada setiap masing-masing node, gunakan fitur Change Symbol untuk merubah symbol dari setiap node sesuai pada topologi gambar soal yang diminta. Setelah berhasil selanjutnya klik Applay
+
+![image](https://github.com/lunielism/yes/assets/93961310/606bdfa9-1851-4c23-9006-3ffa4886467a)
+
+Gambar sudah sesuai dengan topologi soal yang diminta, Langkah selanjutnya yaitu mengkonfigurasi masing-masing IP Prefix node dengan IP Prefix yang sudah disediakan Asisten. Untuk IP Prefix kelompok saya adalah **10.7.**
+
+![image](https://github.com/lunielism/yes/assets/93961310/a40a551d-0d8d-4b1c-97be-a3c8c037a723)
+
+Set up konfigurasi setiap masing - masing node 
+
+Puntadewa 
+# DHCP config for eth0
+```bash
+auto eth0
+iface eth0 inet dhcp
+```
+
+# Konfigurasi eth1
+```bash
+auto eth1
+iface eth1 inet static
+    address 10.7.1.1
+    netmask 255.255.255.0
+```
+
+# Konfigurasi eth2
+```bash
+auto eth2
+iface eth2 inet static
+    address 10.7.2.1
+    netmask 255.255.255.0
+```
+
+# Konfigurasi eth 3
+```bash
+auto eth3
+iface eth3 inet static
+    address 10.7.3.1
+    netmask 255.255.255.0
+```
+Jika berhasil di set up, maka cek konfigurasi jaringan dengan menggunakan ifconfig di node puntadewa. 
+
+
+
+
 ## Soal 2
 Buatlah website utama pada node arjuna dengan akses ke arjuna.yyy.com dengan alias www.arjuna.yyy.com dengan yyy merupakan kode kelompok.
 
