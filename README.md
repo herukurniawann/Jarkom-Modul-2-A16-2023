@@ -202,6 +202,20 @@ service bind9 restart
 
 **Node Sadewa/Nakula**
 
+![image](https://github.com/lunielism/yes/assets/93961310/f5db2d21-317a-4f64-ad52-e8ee36deffa1)
+
+
+```bash
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install dnsutils
+echo nameserver 10.7.1.2 > /etc/resolv.conf
+ping arjuna.a16.com
+```
+
+
+
+
 
 
 ## Soal 3
