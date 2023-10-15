@@ -169,7 +169,7 @@ Buatlah website utama pada node arjuna dengan akses ke arjuna.yyy.com dengan ali
 **Penyelesaian Soal**
 Dikarenakan DNS akan tidak tersedia setelah dihentikan, maka diperlukan penggunaan script.sh untuk memastikan proses berjalan dengan efisien dan tidak berulang. Untuk melakukannya, buka terminal dan ketikkan nano .bashrc. Selanjutnya, tuliskan kembali langkah-langkah sebelumnya di bawah ini.
 
-**Yudhistira**
+**Node Yudhistira**
 ![image](https://github.com/lunielism/yes/assets/93961310/ad6851cf-879b-4264-8c86-1557a6f089e0)
 
 ```bash
@@ -199,6 +199,9 @@ www     IN      CNAME   arjuna.a16.com.
 @       IN      AAAA    ::1' > /etc/bind/arjuna/arjuna.a16.com
 service bind9 restart
 ```
+
+**Node Sadewa/Nakula**
+
 
 
 ## Soal 3
