@@ -202,7 +202,7 @@ service bind9 restart
 
 **Node Sadewa/Nakula**
 
-![image](https://github.com/lunielism/yes/assets/93961310/ad6851cf-879b-4264-8c86-1557a6f089e0)
+![image](https://github.com/lunielism/yes/assets/93961310/4d57db4d-e681-4a83-91cc-5ee66a878faf)
 
 ```bash
 echo nameserver 192.168.122.1 > /etc/resolv.conf
