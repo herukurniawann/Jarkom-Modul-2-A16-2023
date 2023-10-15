@@ -41,6 +41,7 @@ Gambar sudah sesuai dengan topologi soal yang diminta, Langkah selanjutnya yaitu
 Set up konfigurasi setiap masing - masing node 
 
 **Puntadewa**
+
 DHCP config for eth0
 ```bash
 auto eth0
