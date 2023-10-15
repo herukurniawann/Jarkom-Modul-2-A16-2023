@@ -163,14 +163,43 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.7.0.0/16
 
 ![image](https://github.com/lunielism/yes/assets/93961310/05b162e3-eb43-402a-8892-6f1b0f3b19ec)
 
-
-
-
-
-
-
 ## Soal 2
 Buatlah website utama pada node arjuna dengan akses ke arjuna.yyy.com dengan alias www.arjuna.yyy.com dengan yyy merupakan kode kelompok.
+
+**Penyelesaian Soal**
+Dikarenakan DNS akan tidak tersedia setelah dihentikan, maka diperlukan penggunaan script.sh untuk memastikan proses berjalan dengan efisien dan tidak berulang. Untuk melakukannya, buka terminal dan ketikkan nano .bashrc. Selanjutnya, tuliskan kembali langkah-langkah sebelumnya di bawah ini.
+
+**Yudhistira**
+![image](https://github.com/lunielism/yes/assets/93961310/ad6851cf-879b-4264-8c86-1557a6f089e0)
+
+``bash
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install bind9 -y
+echo 'zone "arjuna.a16.com"{  
+        type master;
+        file "/etc/bind/arjuna/arjuna.a16.com";
+};' > /etc/bind/named.conf.local
+mkdir /etc/bind/arjuna
+cp /etc/bind/db.local /etc/bind/arjuna/arjuna.a16.com
+echo ';
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     arjuna.a16.com. root.arjuna.a16.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      arjuna.a16.com.
+@       IN      A       10.7.3.5       ; IP Arjuna 
+www     IN      CNAME   arjuna.a16.com.
+@       IN      AAAA    ::1' > /etc/bind/arjuna/arjuna.a16.com
+service bind9 restart
+```
+
 
 ## Soal 3
 Dengan cara yang sama seperti soal nomor 2, buatlah website utama dengan akses ke abimanyu.yyy.com dan alias www.abimanyu.yyy.com.
