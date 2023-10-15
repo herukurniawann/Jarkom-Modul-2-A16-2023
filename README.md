@@ -218,6 +218,9 @@ ping arjuna.a16.com
 ## Soal 3
 Dengan cara yang sama seperti soal nomor 2, buatlah website utama dengan akses ke abimanyu.yyy.com dan alias www.abimanyu.yyy.com.
 
+**Penyelesaian Soal**
+Tindakan yang harus diambil adalah serupa dengan langkah kedua, namun kali ini ada modifikasi pada kode program. kemudian tuliskan kode program berikut di node **Yudhistira.**
+
 **Node Yudhistira**
 
 ![image](https://github.com/lunielism/yes/assets/93961310/6afb234a-dfd1-463b-a703-2670c2861da8)
@@ -262,6 +265,9 @@ ping www.abimanyu.a16.com -c 5
 
 ## Soal 4
 Kemudian, karena terdapat beberapa web yang harus di-deploy, buatlah subdomain parikesit.abimanyu.yyy.com yang diatur DNS-nya di Yudhistira dan mengarah ke Abimanyu.
+
+**Penyelesaian Soal**
+Yang diperlukan serupa dengan langkah ketiga, tetapi kali ini Anda perlu menambahkan subdomain dengan nama **"parikesit"** pada kode program. Silakan tuliskan kode program ini pada web console di node **Yudhistira.**
 
 **Node Yudhistira**
 
