@@ -40,14 +40,14 @@ Gambar sudah sesuai dengan topologi soal yang diminta, Langkah selanjutnya yaitu
 
 Set up konfigurasi setiap masing - masing node 
 
-Puntadewa 
-# DHCP config for eth0
+**Puntadewa**
+DHCP config for eth0
 ```bash
 auto eth0
 iface eth0 inet dhcp
 ```
 
-# Konfigurasi eth1
+Konfigurasi eth1
 ```bash
 auto eth1
 iface eth1 inet static
@@ -55,7 +55,7 @@ iface eth1 inet static
     netmask 255.255.255.0
 ```
 
-# Konfigurasi eth2
+Konfigurasi eth2
 ```bash
 auto eth2
 iface eth2 inet static
@@ -63,14 +63,107 @@ iface eth2 inet static
     netmask 255.255.255.0
 ```
 
-# Konfigurasi eth 3
+Konfigurasi eth 3
 ```bash
 auto eth3
 iface eth3 inet static
     address 10.7.3.1
     netmask 255.255.255.0
 ```
-Jika berhasil di set up, maka cek konfigurasi jaringan dengan menggunakan ifconfig di node puntadewa. 
+
+Jika berhasil di set up, maka cek konfigurasi jaringan dengan menggunakan **ifconfig** di node puntadewa. 
+
+![image](https://github.com/lunielism/yes/assets/93961310/6016d9d2-69ae-4f1f-a250-138a539cab19)
+
+Jika sudah di cek dan sudah berhasil. maka dilanjutkan untuk set up node lain
+
+**eth1**
+Konfigurasi Yudhistira
+```bash
+auto eth0
+iface eth0 inet static
+     	address 10.7.1.2
+     	netmask 255.255.255.0
+     	gateway 10.7.1.1
+```
+
+Konfigurasi Nakula
+```bash
+auto eth0
+iface eth0 inet static
+     	address 10.7.1.3
+     	netmask 255.255.255.0
+     	gateway 10.7.1.1
+```
+
+eth2
+Konfigurasi Werkudara
+```bash
+auto eth0
+iface eth0 inet static
+     	address 10.7.2.2
+     	netmask 255.255.255.0
+     	gateway 10.7.2.1
+```
+
+Konfigurasi Sadewa
+```bash
+auto eth0
+iface eth0 inet static
+     	address 10.7.2.3
+     	netmask 255.255.255.0
+     	gateway 10.7.2.1
+```
+
+eth3
+Konfigurasi Prabukusuma
+```bash
+auto eth0
+iface eth0 inet static
+     	address 10.7.3.2
+     	netmask 255.255.255.0
+     	gateway 10.7.3.1
+```
+
+Konfigurasi Abimanyu
+```bash
+auto eth0
+iface eth0 inet static
+     	address 10.7.3.3
+     	netmask 255.255.255.0
+     	gateway 10.7.3.1
+```
+
+Konfigurasi Wisanggeni
+```bash
+auto eth0
+iface eth0 inet static
+     	address 10.7.3.4
+     	netmask 255.255.255.0
+     	gateway 10.7.3.1
+```
+
+Konfigurasi Arjuna
+```bash
+auto eth0
+iface eth0 inet static
+     	address 10.7.3.5
+     	netmask 255.255.255.0
+     	gateway 10.7.3.1
+```
+
+Kemudian setelah mensetting semua node, langkah selanjutnya adalah mensetting iptable agar seluruh node dibawah router dapat terhubung dengan internet.
+
+dengan menggunakan sebagai berikut
+
+```bash
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.7.0.0/16
+```
+
+![image](https://github.com/lunielism/yes/assets/93961310/05b162e3-eb43-402a-8892-6f1b0f3b19ec)
+
+
+
 
 
 
