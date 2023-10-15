@@ -263,6 +263,42 @@ ping www.abimanyu.a16.com -c 5
 ## Soal 4
 Kemudian, karena terdapat beberapa web yang harus di-deploy, buatlah subdomain parikesit.abimanyu.yyy.com yang diatur DNS-nya di Yudhistira dan mengarah ke Abimanyu.
 
+**Node Yudhistira**
+
+![image](https://github.com/lunielism/yes/assets/93961310/7bd0c4f2-b69d-47f5-88e1-c6346da2be16)
+
+```bash
+
+echo ';
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.a16.com. root.abimanyu.a16.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      abimanyu.a16.com.
+@       IN      A       10.7.3.3       ; IP Abimanyu 
+www     IN      CNAME   abimanyu.a16.com.
+parikesit   IN  A   10.7.3.3   ; IP Abimanyu
+@       IN      AAAA    ::1' > /etc/bind/jarkom/abimanyu.a16.com
+service bind9 restart
+```
+**Node Nakula/Sadewa**
+
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/c7f3994d-0f00-40c3-8adc-44c0dab81373)
+
+```bash
+ping parikesit.abimanyu.a16.com
+```
+
+**Hasil**
+
+![image](https://github.com/lunielism/yes/assets/93961310/24b7a8cb-bed0-4b47-bfdc-a2596c0b89ab)
+
 ## Soal 5
 Buat juga reverse domain untuk domain utama. (Abimanyu saja yang direverse)
 
