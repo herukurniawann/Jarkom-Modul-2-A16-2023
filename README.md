@@ -74,7 +74,7 @@ iface eth3 inet static
 
 Jika berhasil di set up, maka cek konfigurasi jaringan dengan menggunakan **ifconfig** di node puntadewa. 
 
-![image](https://github.com/lunielism/yes/assets/93961310/6016d9d2-69ae-4f1f-a250-138a539cab19)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/594392b6-2ac7-4a5f-856e-043a187c4a2f)
 
 Jika sudah di cek dan sudah berhasil. maka dilanjutkan untuk set up node lain
 
@@ -161,7 +161,7 @@ dengan menggunakan sebagai berikut
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.7.0.0/16
 ```
 
-![image](https://github.com/lunielism/yes/assets/93961310/05b162e3-eb43-402a-8892-6f1b0f3b19ec)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/f99f80b6-6638-486a-9add-6f67f54bfde7)
 
 ## Soal 2
 Buatlah website utama pada node arjuna dengan akses ke arjuna.yyy.com dengan alias www.arjuna.yyy.com dengan yyy merupakan kode kelompok.
@@ -170,7 +170,7 @@ Buatlah website utama pada node arjuna dengan akses ke arjuna.yyy.com dengan ali
 Dikarenakan DNS akan tidak tersedia setelah dihentikan, maka diperlukan penggunaan script.sh untuk memastikan proses berjalan dengan efisien dan tidak berulang. Untuk melakukannya, buka terminal dan ketikkan nano .bashrc. Selanjutnya, tuliskan kembali langkah-langkah sebelumnya di bawah ini.
 
 **Node Yudhistira**
-![image](https://github.com/lunielism/yes/assets/93961310/ad6851cf-879b-4264-8c86-1557a6f089e0)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/5f13230b-8adf-4b39-8733-ff391df53c46)
 
 ```bash
 echo nameserver 192.168.122.1 > /etc/resolv.conf
@@ -202,7 +202,7 @@ service bind9 restart
 
 **Node Sadewa/Nakula**
 
-![image](https://github.com/lunielism/yes/assets/93961310/4d57db4d-e681-4a83-91cc-5ee66a878faf)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/34472dd8-4ddf-40b3-94ee-d671e3228fe8)
 
 ```bash
 echo nameserver 192.168.122.1 > /etc/resolv.conf
@@ -213,7 +213,7 @@ ping arjuna.a16.com
 ```
 **Hasil**
 
-![image](https://github.com/lunielism/yes/assets/93961310/f5db2d21-317a-4f64-ad52-e8ee36deffa1)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/ae86a7b0-ecea-49d9-9103-c0fc73bbfe41)
 
 ## Soal 3
 Dengan cara yang sama seperti soal nomor 2, buatlah website utama dengan akses ke abimanyu.yyy.com dan alias www.abimanyu.yyy.com.
@@ -223,7 +223,7 @@ Tindakan yang harus diambil adalah serupa dengan langkah kedua, namun kali ini a
 
 **Node Yudhistira**
 
-![image](https://github.com/lunielism/yes/assets/93961310/6afb234a-dfd1-463b-a703-2670c2861da8)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/0652053f-d0dd-4aec-8689-b19a1c9bf35b)
 
 ```bash
 echo 'zone "abimanyu.a16.com"{  
@@ -251,7 +251,7 @@ service bind9 restart
 
 **Node Sadewa/Nakula**
 
-![image](https://github.com/lunielism/yes/assets/93961310/5ba0178a-d447-451f-b93f-1e77c0200a04)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/772580eb-751d-40ad-8ea4-62a34fbe2cf1)
 
 ```bash
 echo nameserver 10.7.1.2 > /etc/resolv.conf
@@ -261,7 +261,7 @@ ping www.abimanyu.a16.com -c 5
 
 **Hasil**
 
-![image](https://github.com/lunielism/yes/assets/93961310/3a6120fb-0d4a-4c04-8e8f-77745217b072)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/83b2b7fa-4fde-4588-a295-513fdb726076)
 
 ## Soal 4
 Kemudian, karena terdapat beberapa web yang harus di-deploy, buatlah subdomain parikesit.abimanyu.yyy.com yang diatur DNS-nya di Yudhistira dan mengarah ke Abimanyu.
@@ -271,7 +271,7 @@ Yang diperlukan serupa dengan langkah ketiga, tetapi kali ini Anda perlu menamba
 
 **Node Yudhistira**
 
-![image](https://github.com/lunielism/yes/assets/93961310/7bd0c4f2-b69d-47f5-88e1-c6346da2be16)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/9ddd7bd5-be53-4e45-aecf-01c2e99a36ba)
 
 ```bash
 
@@ -303,14 +303,14 @@ ping parikesit.abimanyu.a16.com
 
 **Hasil**
 
-![image](https://github.com/lunielism/yes/assets/93961310/11a860f7-9ca9-429e-80eb-1df587d71a55)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/29eb4428-8d45-4073-a31f-e017aff0e117)
 
 ## Soal 5
 Buat juga reverse domain untuk domain utama. (Abimanyu saja yang direverse)
 
 Tahapan berikutnya adalah mendokumentasikan kembali kode program yang mencakup penambahan domain terbalik di **Yudhistira**. Kode programnya memiliki format seperti berikut ini.
 
-![image](https://github.com/lunielism/yes/assets/93961310/2c579255-3771-46f7-a8f0-c0a6f5821e10)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/9ed11325-01ec-46d4-a55d-43a4b89f044e)
 
 
 ```bash
@@ -335,7 +335,7 @@ zone "3.7.10.in-addr.arpa" {
         file "/etc/bind/arjuna/3.7.10.in-addr.arpa";
 ```
 **Node Nakula&Sadewa**
-![image](https://github.com/lunielism/yes/assets/93961310/227f6dc3-948d-4ced-b076-18bed5e8fa74)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/2b5c7f88-9d2e-4ccd-bac0-1bcd76e31dc9)
 
 ```bash
 echo nameserver 10.7.1.2 > /etc/resolv.conf
@@ -343,7 +343,7 @@ host -t PTR 10.7.1.2
 ```
 
 **Hasil** 
-![image](https://github.com/lunielism/yes/assets/93961310/9fc7c0c5-50b5-4b48-8287-f30e7724bf14)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/427a6d96-bde8-4e16-86ae-e7cc1d723418)
 
 
 ## Soal 6
@@ -352,7 +352,7 @@ Agar dapat tetap dihubungi ketika DNS Server Yudhistira bermasalah, buat juga We
 Untuk mengerjakan DNS Slave, kita memerlukan beberapa konfigurasi pada DNS Master dan DNS Slave (Werkudara)
 
 **Node Yudhistira**
-![image](https://github.com/lunielism/yes/assets/93961310/a0aa9e1e-3277-4a90-b4f2-afc70f1b9bf0)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/82258417-d331-467a-a61e-9360ba053881)
 
 ```bash
 echo 'zone "arjuna.a16.com"{  
@@ -377,7 +377,7 @@ service bind9 restart
 ```
 **Node Werkudara**
 
-![image](https://github.com/lunielism/yes/assets/93961310/98f2e477-02d6-4cb6-a5cd-60f0f465630c)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/9be2d8cf-8f0c-469d-b168-766e81b48945)
 
 ```bash
 zone "arjuna.a16.com" {
@@ -393,7 +393,7 @@ zone "abimanyu.a16.com" {
 ```
 
 **Node Nakula**
-![image](https://github.com/lunielism/yes/assets/93961310/474f1247-564f-4d79-a4b5-ca02e339f377)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/b84d635b-d476-4312-8573-e46dde877371)
 
 ```bash
 nameserver 10.7.1.2
@@ -401,12 +401,12 @@ nameserver 10.7.2.2
 ```
 Kemudian matikan bind server pada Yudhistira ```bash service bind9 stop``` dan aktifkan bind server pada Werkudara  ```bash service bind9 restart```, setelah itu lakukan ping di node nakula.
 
-![image](https://github.com/lunielism/yes/assets/93961310/45532069-a5de-40ef-8505-fd6a664ea314)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/80de3abc-0a32-4823-a529-3c0a3aede438)
 
-![image](https://github.com/lunielism/yes/assets/93961310/48a563d2-75ec-4a73-a340-2f5ff347f5c1)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/c60c94aa-d3be-4d69-94b4-6d8a67aea315)
 
 **Hasil**
-![image](https://github.com/lunielism/yes/assets/93961310/7132f8fe-721a-4da1-a859-d6c9ec6fbaef)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/0289a13a-1ae0-4f60-8820-d63cfd971380)
 
 ## Soal 7
 Seperti yang kita tahu karena banyak sekali informasi yang harus diterima, buatlah subdomain khusus untuk perang yaitu baratayuda.abimanyu.yyy.com dengan alias www.baratayuda.abimanyu.yyy.com yang didelegasikan dari Yudhistira ke Werkudara dengan IP menuju ke Abimanyu dalam folder Baratayuda.
@@ -415,7 +415,7 @@ Untuk melakukan Delegasi subdomain, kita memerlukan beberapa configurasi pada DN
 
 **Yudhistira**
 
-![image](https://github.com/lunielism/yes/assets/93961310/1eb18d40-f2ce-4973-bd2b-21d99b45f600)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/967dabf9-e5f0-427d-a2f2-c4944697debe)
 
 ```bash
 echo ';
@@ -443,7 +443,7 @@ service bind9 restart
 
 **Node Werkudara**
 
-![image](https://github.com/lunielism/yes/assets/93961310/3299610e-97fc-4c2a-822d-af5306ee8b6d)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/e7bc4a84-94ad-46c1-a8aa-04fc67174c1f)
 
 ```bash
  allow-query {any;};
@@ -451,7 +451,7 @@ service bind9 restart
         listen-on-v6 { any; };
 ```
 
-![image](https://github.com/lunielism/yes/assets/93961310/9faf2497-1167-42af-ba93-a0586a0240da)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/fadf61e3-bd01-482f-a46f-90d172a36151)
 
 ```bash
 zone "baratayuda.abimanyu.a16.com" {
@@ -487,7 +487,7 @@ www.rjp IN      CNAME   rjp.baratayuda.abimanyu.a16.com.
 
 **Hasil**
 
-![image](https://github.com/lunielism/yes/assets/93961310/5b5ca465-2811-4970-858e-be24fe7511fa)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/53408b59-cfd3-4508-9a1b-3cffb38d6f02)
 
 
 ## Soal 8
@@ -497,7 +497,7 @@ Karena kita sudah melakukan Delegasi subdomain, langkah selanjutnya adalah melak
 
 **Node Werkudara
 
-![image](https://github.com/lunielism/yes/assets/93961310/ef99a618-04ec-4b02-b5db-c4888ebf65e6)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/c950091e-ea93-48e6-a595-058980e80102)
 
 ```bash
 
@@ -521,7 +521,7 @@ www.rjp IN      CNAME   rjp.baratayuda.abimanyu.a16.com.
 ```
 
 **Hasil**
-![image](https://github.com/lunielism/yes/assets/93961310/77de6584-c2f9-4212-82ff-5a470cc9e6a7)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/2ccd21f4-91d5-4d96-a7c9-7f01bffc410e)
 
 
 ## Soal 9
