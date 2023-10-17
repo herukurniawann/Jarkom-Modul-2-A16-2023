@@ -309,10 +309,37 @@ ping parikesit.abimanyu.a16.com
 Buat juga reverse domain untuk domain utama. (Abimanyu saja yang direverse)
 Tahapan berikutnya adalah mendokumentasikan kembali kode program yang mencakup penambahan domain terbalik di **Yudhistira**. Kode programnya memiliki format seperti berikut ini.
 
+![image](https://github.com/lunielism/yes/assets/93961310/2c579255-3771-46f7-a8f0-c0a6f5821e10)
 
 
+```bash
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.a16.com. root.abimanyu.a16.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+3.7.10.in-addr.arpa.   IN      NS      abimanyu.a16.com.
+3                       IN      PTR     abimanyu.a16.com. ' > /etc/bind/arjuna/$
 
+echo '
+zone "3.7.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/arjuna/3.7.10.in-addr.arpa";
+```
+**Node Nakula&Sadewa**
+![image](https://github.com/lunielism/yes/assets/93961310/227f6dc3-948d-4ced-b076-18bed5e8fa74)
 
+```bash
+echo nameserver 10.7.1.2 > /etc/resolv.conf
+host -t PTR 10.7.1.2
+```
 
 **Hasil** 
 ![image](https://github.com/lunielism/yes/assets/93961310/9fc7c0c5-50b5-4b48-8287-f30e7724bf14)
