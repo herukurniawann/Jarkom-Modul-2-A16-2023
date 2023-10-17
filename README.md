@@ -710,10 +710,90 @@ lynx http://10.7.3.3
 lynx http://10.7.3.4
 lynx http://10.7.3.5
 lynx http://arjuna.a16.com
-
+```
 
 ## Soal 11
 Selain menggunakan Nginx, lakukan konfigurasi Apache Web Server pada worker Abimanyu dengan web server www.abimanyu.yyy.com. Pertama dibutuhkan web server dengan DocumentRoot pada /var/www/abimanyu.yyy
+
+#### Langkah 1: Konfigurasi DNS - Yudhistira
+
+Langkah pertama yang kami lakukan adalah mengkonfigurasi DNS untuk mengarahkan domain abimanyu.a16.com ke alamat IP Abimanyu (10.7.3.3) supaya domain www.abimanyu.yyy.com dapat diakses dengan benar.
+
+1. Jalankan script berikut di server Yudhistira:
+
+```bash
+#!/bin/bash
+
+# Konfigurasi DNS Abimanyu
+echo '
+; BIND data file for local loopback interface
+;
+$TTL 604800
+@   IN  SOA abimanyu.a16.com. root.abimanyu.a16.com. (
+    2       ; Serial
+    604800  ; Refresh
+    86400   ; Retry
+    2419200 ; Expire
+    604800  ; Negative Cache TTL
+)
+@   IN  NS  abimanyu.a16.com.
+@   IN  A   10.7.3.3
+www IN  CNAME abimanyu.a16.com
+parikesit IN A 10.7.3.3
+ns1 IN A 10.7.2.2
+baratayuda IN NS ns1
+' > /etc/bind/jarkom/abimanyu.a16.com
+
+# Restart Bind9
+service bind9 restart
+
+# Konfigurasi Apache Abimanyu
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/abimanyu.a16.com.conf
+
+rm /etc/apache2/sites-available/000-default.conf
+
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/abimanyu.a16
+
+  ServerName abimanyu.a16.com
+  ServerAlias www.abimanyu.a16.com
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/abimanyu.a16.com.conf
+
+a2ensite abimanyu.a16.com.conf
+
+# Restart Apache2
+service apache2 restart
+```
+#### Langkah 2: Konfigurasi Apache - Abimanyu 
+```bash
+# Konfigurasi Apache untuk Abimanyu
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/abimanyu.a16.com.conf
+rm /etc/apache2/sites-available/000-default.conf
+
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/abimanyu.a16
+
+  ServerName abimanyu.a16.com
+  ServerAlias www.abimanyu.a16.com
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/abimanyu.a16.com.conf
+
+a2ensite abimanyu.a16.com.conf
+service apache2 restart
+
+```
+Script yang kami susun akan mengkonfigurasi Apache agar mampu melayani domain www.abimanyu.yyy.com dengan menggunakan alamat IP yang telah ditentuka
+#### Langkah 3: Uji Situs Web
+```bash
+lynx abimanyu.a16.com
+```
 
 ## Soal 12
 Setelah itu ubahlah agar url www.abimanyu.yyy.com/index.php/home menjadi www.abimanyu.yyy.com/home.
