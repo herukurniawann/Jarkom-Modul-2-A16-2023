@@ -944,8 +944,7 @@ Buatlah suatu konfigurasi virtual host agar file asset www.parikesit.abimanyu.yy
 www.parikesit.abimanyu.yyy.com/js 
 
 **Penyelesaian**
-Sebelum mengerjakan perlu untuk melakukan setup terlebih dahulu. Disini kita hanya perlu menggunakan Alias "/js" "/var/www/parikesit.abimanyu.a16/public/js" untuk mengubah virtual host agar file tersebut menjadi lebih singkat. Disini kami juga menggunakan ServerName dan ServerAlias agar virtual host dapat berjalan.
-
+Sebelum memulai, pastikan untuk melakukan konfigurasi awal terlebih dahulu. Di sini, kita hanya perlu menetapkan Alias "/js" ke "/var/www/parikesit.abimanyu.a16/public/js" untuk mempersingkat konfigurasi virtual host. Selain itu, kami juga memanfaatkan ServerName dan ServerAlias untuk memastikan virtual host berjalan dengan baik.
 
 **Node Abimanyu**
 ```bash
@@ -986,8 +985,7 @@ Agar aman, buatlah konfigurasi agar www.rjp.baratayuda.abimanyu.yyy.com hanya da
 
 **Penyelesaian**
 
-Sebelum mengerjakan perlu untuk melakukan setup terlebih dahulu. Untuk melakukan kustomisasi pada port tertentu. Kita hanya perlu mengubah file ports.conf dengan menambahkan Listen 14000 dan Listen 14400. Kita juga perlu mengubah <VirtualHost *:14000 *:14400>
-
+Sebelum mulai, diperlukan persiapan awal. Ini melibatkan penyesuaian pada port-port khusus. Cukup ubah berkas ports.conf dengan menambahkan Listen 14000 dan Listen 14400. Selain itu, perlu modifikasi pada <VirtualHost *:14000 *:14400>.
 **Node Abimanyu**
 ```bash
 echo -e '<VirtualHost *:14000 *:14400>
@@ -1040,7 +1038,7 @@ Port yang tidak sesuai image
 Untuk mengaksesnya buatlah autentikasi username berupa “Wayang” dan password “baratayudayyy” dengan yyy merupakan kode kelompok. Letakkan DocumentRoot pada /var/www/rjp.baratayuda.abimanyu.yyy.
 
 **Penyelesaian**
-Sebelum mengerjakan perlu untuk melakukan setup terlebih dahulu. Untuk melakukan kustomisasi pada port tertentu. Kita hanya perlu mengubah file ports.conf dengan menambahkan Listen 14000 dan Listen 14400. Kita juga perlu mengubah <VirtualHost *:14000 *:14400>
+Sebelum memulai tindakan ini, pastikan untuk melakukan konfigurasi awal terlebih dahulu. Untuk melakukan penyesuaian pada port tertentu, cukup modifikasi file ports.conf dengan menambahkan perintah Listen 14000 dan Listen 14400. Selain itu, perlu juga mengubah bagian <VirtualHost *:14000 *:14400>.
 
 **Node Abimanyu**
 ```bash
@@ -1094,7 +1092,7 @@ Buatlah agar setiap kali mengakses IP dari Abimanyu akan secara otomatis dialihk
 
 **Penyelesaian**
 
-Sebelum mengerjakan perlu untuk melakukan setup terlebih dahulu. Agar ketika kita mengakses IP dari abimanyu dapat otomatis dialihkan ke www.abimanyu.a16.com. Kita perlu menggunakan file Redirect yang akan mengarahkan kepada file yang kita inginkan. Disini saya memasukkan ke dalam file konfigurasi 000-default.conf karena merupakan default dari suatu service apache.
+Sebelum memulai tindakan ini, pastikan untuk melakukan konfigurasi awal terlebih dahulu. Untuk memastikan bahwa ketika mengakses IP dari abimanyu, secara otomatis akan diarahkan ke www.abimanyu.a16.com, kita perlu menggunakan file Redirect yang akan menunjuk ke halaman yang diinginkan. Saya akan memasukkan konfigurasi ini ke dalam file 000-default.conf karena merupakan pengaturan default dari layanan Apache.
 
 **Node Abimanyu**
 ```bash
@@ -1122,7 +1120,7 @@ Karena website www.parikesit.abimanyu.yyy.com semakin banyak pengunjung dan bany
 
 **Penyelesaian**
 
-Sebelum mengerjakan perlu untuk melakukan setup terlebih dahulu.
+Langkah pertama perlu untuk melakukan setup terlebih dahulu.
 
 
 **Node Abimanyu** 
