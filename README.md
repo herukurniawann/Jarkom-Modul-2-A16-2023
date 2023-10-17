@@ -307,6 +307,7 @@ ping parikesit.abimanyu.a16.com
 
 ## Soal 5
 Buat juga reverse domain untuk domain utama. (Abimanyu saja yang direverse)
+
 Tahapan berikutnya adalah mendokumentasikan kembali kode program yang mencakup penambahan domain terbalik di **Yudhistira**. Kode programnya memiliki format seperti berikut ini.
 
 ![image](https://github.com/lunielism/yes/assets/93961310/2c579255-3771-46f7-a8f0-c0a6f5821e10)
