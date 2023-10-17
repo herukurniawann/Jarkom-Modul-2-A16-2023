@@ -1038,7 +1038,7 @@ Port yang tidak sesuai image
 Untuk mengaksesnya buatlah autentikasi username berupa “Wayang” dan password “baratayudayyy” dengan yyy merupakan kode kelompok. Letakkan DocumentRoot pada /var/www/rjp.baratayuda.abimanyu.yyy.
 
 **Penyelesaian**
-Sebelum memulai tindakan ini, pastikan untuk melakukan konfigurasi awal terlebih dahulu. Untuk melakukan penyesuaian pada port tertentu, cukup modifikasi file ports.conf dengan menambahkan perintah Listen 14000 dan Listen 14400. Selain itu, perlu juga mengubah bagian <VirtualHost *:14000 *:14400>.
+Sebelum memulai tugas, langkah awalnya adalah melakukan konfigurasi. Untuk mengamankan server, diperlukan pengaturan AuthType dan Require Valid-User. Kemudian, AuthUserFile akan menentukan lokasi untuk melakukan penulisan. Sementara AuthName merupakan jenis konten otentikasi pada apache2.
 
 **Node Abimanyu**
 ```bash
@@ -1048,6 +1048,13 @@ echo -e '<VirtualHost *:14000 *:14400>
   ServerName rjp.baratayuda.abimanyu.a16.com
   ServerAlias www.rjp.baratayuda.abimanyu.a16.com
 
+  <Directory /var/www/rjp.baratayuda.abimanyu.a16>
+          AuthType Basic
+          AuthName "Restricted Content"
+          AuthUserFile /etc/apache2/.htpasswd
+          Require valid-user
+  </Directory>
+
   ErrorDocument 404 /error/404.html
   ErrorDocument 403 /error/403.html
 
@@ -1055,37 +1062,20 @@ echo -e '<VirtualHost *:14000 *:14400>
   CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>' > /etc/apache2/sites-available/rjp.baratayuda.abimanyu.a16.com.conf
 
-echo -e '# If you just change the port or add more ports here, you will likely also
-# have to change the VirtualHost statement in
-# /etc/apache2/sites-enabled/000-default.conf
-
-Listen 80
-Listen 14000
-Listen 14400
-
-<IfModule ssl_module>
-        Listen 443
-</IfModule>
-
-<IfModule mod_gnutls.c>
-        Listen 443
-</IfModule>
-
-# vim: syntax=apache ts=4 sw=4 sts=4 sr noet' > /etc/apache2/ports.conf
-
 a2ensite rjp.baratayuda.abimanyu.a16.com.conf
 
 service apache2 restart
 ```
+Tambahkan autentikasi dengan menggunakan command htpasswd. Lalu untuk -c itu adalah created dan -b yang merupakan bcrypt agar password yang kita isi akan dilakukan hash terlebih dahulu sebelum disimpan.
 
+```bash
+htpasswd -c -b /etc/apache2/.htpasswd Wayang baratayudaa16
+```
 **Node Client (Sadewa)**
 ```bash
 lynx rjp.baratayuda.abimanyu.a16.com:14000
 lynx rjp.baratayuda.abimanyu.a16.com:14400
 ```
-Port 14000 atau 14400 image
-
-Port yang tidak sesuai image
 
 ## Soal 19
 Buatlah agar setiap kali mengakses IP dari Abimanyu akan secara otomatis dialihkan ke www.abimanyu.yyy.com (alias)
