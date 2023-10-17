@@ -295,7 +295,7 @@ service bind9 restart
 ```
 **Node Nakula/Sadewa**
 
-![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/c7f3994d-0f00-40c3-8adc-44c0dab81373)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/3f68fa35-841f-4d27-bca9-5d2269484d12)
 
 ```bash
 ping parikesit.abimanyu.a16.com
