@@ -307,6 +307,16 @@ ping parikesit.abimanyu.a16.com
 
 ## Soal 5
 Buat juga reverse domain untuk domain utama. (Abimanyu saja yang direverse)
+Tahapan berikutnya adalah mendokumentasikan kembali kode program yang mencakup penambahan domain terbalik di **Yudhistira**. Kode programnya memiliki format seperti berikut ini.
+
+
+
+
+
+
+**Hasil** 
+![image](https://github.com/lunielism/yes/assets/93961310/9fc7c0c5-50b5-4b48-8287-f30e7724bf14)
+
 
 ## Soal 6
 Agar dapat tetap dihubungi ketika DNS Server Yudhistira bermasalah, buat juga Werkudara sebagai DNS Slave untuk domain utama.
