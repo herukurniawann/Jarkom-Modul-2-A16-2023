@@ -19,24 +19,24 @@ Untuk membuat sebuah topologi yang diminta di soal, lakukan set up di GNS3 sampa
 Kemudian salin alamat IP yang tertera yaitu 192.168.56.101 di browser google 
 kemudian akan terbuka tampilan dari GNS3 nya seperti gambar berikut : 
 
-![image](https://github.com/lunielism/yes/assets/93961310/56eadac0-1910-4424-8086-55de4a931ae9)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/19b6e342-9606-4b09-b584-4c5bfca80e06)
 
 Kemudian setelah terbuka tampilan GNS3 Seperti gambar di atas, selanjutnya membuat topologi dan sambungkan setiap masing-masing node dengan gambar yang di minta di soal. 
 Pada praktikkum kali ini kelompok saya mendapat topologi 1.
 
-![image](https://github.com/lunielism/yes/assets/93961310/4c1d046c-df7c-4af8-a1db-1349b8393c9a)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/ddefe1b0-a391-456f-954d-60c6531e6d72)
 
 Gunakan Fitur Changehostname untuk merubah setiap masing-masing node sesuai topologi gambar pada soal yang diminta, ketika sudah berhasil di ubah selanjutnya klik Applay.
 
-![image](https://github.com/lunielism/yes/assets/93961310/7ad85a6a-a744-4ad4-a442-9bf0526e41a4)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/ae20cba3-58a6-4df7-a91d-b7e92a168d58)
 
 Kemudian untuk merubah Symbol pada setiap masing-masing node, gunakan fitur Change Symbol untuk merubah symbol dari setiap node sesuai pada topologi gambar soal yang diminta. Setelah berhasil selanjutnya klik Applay
 
-![image](https://github.com/lunielism/yes/assets/93961310/606bdfa9-1851-4c23-9006-3ffa4886467a)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/1503dae7-dedf-4177-8104-c9397c8670e3)
 
 Gambar sudah sesuai dengan topologi soal yang diminta, Langkah selanjutnya yaitu mengkonfigurasi masing-masing IP Prefix node dengan IP Prefix yang sudah disediakan Asisten. Untuk IP Prefix kelompok saya adalah **10.7.**
 
-![image](https://github.com/lunielism/yes/assets/93961310/a40a551d-0d8d-4b1c-97be-a3c8c037a723)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/48b1abd8-9e15-4150-874b-b76af5b8d80b)
 
 Set up konfigurasi setiap masing - masing node 
 
