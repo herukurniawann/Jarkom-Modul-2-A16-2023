@@ -861,9 +861,84 @@ lynx parikesit.abimanyu.a16.com
 ## Soal 14
 Pada subdomain tersebut folder /public hanya dapat melakukan directory listing sedangkan pada folder /secret tidak dapat diakses (403 Forbidden).
 
+### Cara Pengerjaan
+#### Langkah 1: Konfigurasi Apache - Abimanyu
+
+Jalankan script berikut di server Abimanyu:
+
+```bash
+# Konfigurasi Apache untuk Subdomain parikesit.abimanyu.yyy.com
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/parikesit.abimanyu.a16
+  ServerName parikesit.abimanyu.a16.com
+  ServerAlias www.parikesit.abimanyu.a16.com
+
+  <Directory /var/www/parikesit.abimanyu.a16/public>
+    Options +Indexes
+  </Directory>
+
+  <Directory /var/www/parikesit.abimanyu.a16/secret>
+    Options -Indexes
+  </Directory>
+
+  Alias "/public" "/var/www/parikesit.abimanyu.a16/public"
+  Alias "/secret" "/var/www/parikesit.abimanyu.a16/secret"
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.a16.com.conf
+
+service apache2 restart
+```
+#### Langkah 2: Konfigurasi Apache - Abimanyu
+Kami menguji konfigurasi dengan menggunakan perintah untuk folder public dan secret:
+```bash
+lynx parikesit.abimanyu.a16.com/public
+lynx parikesit.abimanyu.a16.com/secret
+
+```
+
 ## Soal 15
 Buatlah kustomisasi halaman error pada folder /error untuk mengganti error kode pada Apache. Error kode yang perlu diganti adalah 404 Not Found dan 403 Forbidden.
+### Cara Pengerjaan
+#### Langkah 1: Konfigurasi Apache - Abimanyu
+```bash
+# Konfigurasi Apache untuk Kustomisasi Halaman Error
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/parikesit.abimanyu.a16
+  ServerName parikesit.abimanyu.a16.com
+  ServerAlias www.parikesit.abimanyu.a16.com
 
+  <Directory /var/www/parikesit.abimanyu.a16/public>
+    Options +Indexes
+  </Directory>
+
+  <Directory /var/www/parikesit.abimanyu.a16/secret>
+    Options -Indexes
+  </Directory>
+
+  Alias "/public" "/var/www/parikesit.abimanyu.a16/public"
+  Alias "/secret" "/var/www/parikesit.abimanyu.a16/secret"
+
+  ErrorDocument 404 /error/404.html
+  ErrorDocument 403 /error/403.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.a16.com.conf
+
+service apache2 restart
+
+```
+#### Langkah 2: Uji Kustomisasi Halaman Error
+Berikut kami gunakan untuk menguji kustomisasi halaman error dengan menjalankan perintah berikut di client Nakula:
+```bash
+lynx parikesit.abimanyu.a16.com/testerror
+lynx parikesit.abimanyu.a16.com/secret
+
+```
 ## Soal 16
 Buatlah suatu konfigurasi virtual host agar file asset www.parikesit.abimanyu.yyy.com/public/js menjadi 
 www.parikesit.abimanyu.yyy.com/js 
