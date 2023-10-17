@@ -943,14 +943,241 @@ lynx parikesit.abimanyu.a16.com/secret
 Buatlah suatu konfigurasi virtual host agar file asset www.parikesit.abimanyu.yyy.com/public/js menjadi 
 www.parikesit.abimanyu.yyy.com/js 
 
+**Penyelesaian**
+Sebelum mengerjakan perlu untuk melakukan setup terlebih dahulu. Disini kita hanya perlu menggunakan Alias "/js" "/var/www/parikesit.abimanyu.a16/public/js" untuk mengubah virtual host agar file tersebut menjadi lebih singkat. Disini kami juga menggunakan ServerName dan ServerAlias agar virtual host dapat berjalan.
+
+
+**Node Abimanyu**
+```bash
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/parikesit.abimanyu.a16
+  ServerName parikesit.abimanyu.a16.com
+  ServerAlias www.parikesit.abimanyu.a16.com
+
+  <Directory /var/www/parikesit.abimanyu.a16/public>
+          Options +Indexes
+  </Directory>
+
+  <Directory /var/www/parikesit.abimanyu.a16/secret>
+          Options -Indexes
+  </Directory>
+
+  Alias "/public" "/var/www/parikesit.abimanyu.a16/public"
+  Alias "/secret" "/var/www/parikesit.abimanyu.a16/secret"
+  Alias "/js" "/var/www/parikesit.abimanyu.a16/public/js"
+
+  ErrorDocument 404 /error/404.html
+  ErrorDocument 403 /error/403.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.a16.com.conf
+```
+
+**Node Client (Sadewa)***
+```bash
+lynx parikesit.abimanyu.a16.com/js
+
+```
 ## Soal 17
+
 Agar aman, buatlah konfigurasi agar www.rjp.baratayuda.abimanyu.yyy.com hanya dapat diakses melalui port 14000 dan 14400.
+
+**Penyelesaian**
+
+Sebelum mengerjakan perlu untuk melakukan setup terlebih dahulu. Untuk melakukan kustomisasi pada port tertentu. Kita hanya perlu mengubah file ports.conf dengan menambahkan Listen 14000 dan Listen 14400. Kita juga perlu mengubah <VirtualHost *:14000 *:14400>
+
+**Node Abimanyu**
+```bash
+echo -e '<VirtualHost *:14000 *:14400>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/rjp.baratayuda.abimanyu.a16
+  ServerName rjp.baratayuda.abimanyu.a16.com
+  ServerAlias www.rjp.baratayuda.abimanyu.a16.com
+
+  ErrorDocument 404 /error/404.html
+  ErrorDocument 403 /error/403.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/rjp.baratayuda.abimanyu.a16.com.conf
+
+echo -e '# If you just change the port or add more ports here, you will likely also
+# have to change the VirtualHost statement in
+# /etc/apache2/sites-enabled/000-default.conf
+
+Listen 80
+Listen 14000
+Listen 14400
+
+<IfModule ssl_module>
+        Listen 443
+</IfModule>
+
+<IfModule mod_gnutls.c>
+        Listen 443
+</IfModule>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet' > /etc/apache2/ports.conf
+
+a2ensite rjp.baratayuda.abimanyu.a16.com.conf
+
+service apache2 restart
+```
+
+**Node Client (Sadewa)**
+```bash
+lynx rjp.baratayuda.abimanyu.a16.com:14000
+lynx rjp.baratayuda.abimanyu.a16.com:14400
+```
+Result
+Port 14000 atau 14400 image
+
+Port yang tidak sesuai image
 
 ## Soal 18
 Untuk mengaksesnya buatlah autentikasi username berupa “Wayang” dan password “baratayudayyy” dengan yyy merupakan kode kelompok. Letakkan DocumentRoot pada /var/www/rjp.baratayuda.abimanyu.yyy.
 
+**Penyelesaian**
+Sebelum mengerjakan perlu untuk melakukan setup terlebih dahulu. Untuk melakukan kustomisasi pada port tertentu. Kita hanya perlu mengubah file ports.conf dengan menambahkan Listen 14000 dan Listen 14400. Kita juga perlu mengubah <VirtualHost *:14000 *:14400>
+
+**Node Abimanyu**
+```bash
+echo -e '<VirtualHost *:14000 *:14400>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/rjp.baratayuda.abimanyu.a16
+  ServerName rjp.baratayuda.abimanyu.a16.com
+  ServerAlias www.rjp.baratayuda.abimanyu.a16.com
+
+  ErrorDocument 404 /error/404.html
+  ErrorDocument 403 /error/403.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/rjp.baratayuda.abimanyu.a16.com.conf
+
+echo -e '# If you just change the port or add more ports here, you will likely also
+# have to change the VirtualHost statement in
+# /etc/apache2/sites-enabled/000-default.conf
+
+Listen 80
+Listen 14000
+Listen 14400
+
+<IfModule ssl_module>
+        Listen 443
+</IfModule>
+
+<IfModule mod_gnutls.c>
+        Listen 443
+</IfModule>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet' > /etc/apache2/ports.conf
+
+a2ensite rjp.baratayuda.abimanyu.a16.com.conf
+
+service apache2 restart
+```
+
+**Node Client (Sadewa)**
+```bash
+lynx rjp.baratayuda.abimanyu.a16.com:14000
+lynx rjp.baratayuda.abimanyu.a16.com:14400
+```
+Port 14000 atau 14400 image
+
+Port yang tidak sesuai image
+
 ## Soal 19
 Buatlah agar setiap kali mengakses IP dari Abimanyu akan secara otomatis dialihkan ke www.abimanyu.yyy.com (alias)
 
+**Penyelesaian**
+
+Sebelum mengerjakan perlu untuk melakukan setup terlebih dahulu. Agar ketika kita mengakses IP dari abimanyu dapat otomatis dialihkan ke www.abimanyu.a16.com. Kita perlu menggunakan file Redirect yang akan mengarahkan kepada file yang kita inginkan. Disini saya memasukkan ke dalam file konfigurasi 000-default.conf karena merupakan default dari suatu service apache.
+
+**Node Abimanyu**
+```bash
+echo -e '<VirtualHost *:80>
+    ServerAdmin webmaster@abimanyu.a16.com
+    DocumentRoot /var/www/html
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    Redirect / http://www.abimanyu.a16.com/
+</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+Config test
+
+apache2ctl configtest
+service apache2 restart
+```
+**Node Client (Sadewa)**
+```bash
+lynx 10.7.3.3
+```
+
 ## Soal 20
 Karena website www.parikesit.abimanyu.yyy.com semakin banyak pengunjung dan banyak gambar gambar random, maka ubahlah request gambar yang memiliki substring “abimanyu” akan diarahkan menuju abimanyu.png.
+
+**Penyelesaian**
+
+Sebelum mengerjakan perlu untuk melakukan setup terlebih dahulu.
+
+
+**Node Abimanyu** 
+Jangan lupa untuk menjalankan perintah berikut agar dapat melakukan rewrite modul
+```bash
+a2enmod rewrite
+Lalu jalankan perintah tersebut untuk melakukan rewrite terhdap directory parikesit.abimanyu.a16
+
+echo 'RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/public/images/(.*)abimanyu(.*)
+RewriteCond %{REQUEST_URI} !/public/images/abimanyu.png
+RewriteRule abimanyu http://parikesit.abimanyu.a16.com/public/images/abimanyu.png$1 [L,R=301]' > /var/www/parikesit.abimanyu.a16/.htaccess
+Ubah konfigurasi dan gunakan AllowOverride All untuk mengkonfigurasi nya dengan .htaccess sebelumnya.
+
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/parikesit.abimanyu.a16
+
+  ServerName parikesit.abimanyu.a16.com
+  ServerAlias www.parikesit.abimanyu.a16.com
+
+  <Directory /var/www/parikesit.abimanyu.a16/public>
+          Options +Indexes
+  </Directory>
+
+  <Directory /var/www/parikesit.abimanyu.a16/secret>
+          Options -Indexes
+  </Directory>
+
+  <Directory /var/www/parikesit.abimanyu.a16>
+          Options +FollowSymLinks -Multiviews
+          AllowOverride All
+  </Directory>
+
+  Alias "/public" "/var/www/parikesit.abimanyu.a16/public"
+  Alias "/secret" "/var/www/parikesit.abimanyu.a16/secret"
+  Alias "/js" "/var/www/parikesit.abimanyu.a16/public/js"
+
+  ErrorDocument 404 /error/404.html
+  ErrorDocument 403 /error/403.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.a16.com.conf
+
+service apache2 restart
+```
+
+**Node Client (Sadewa)**
+```bash
+lynx parikesit.abimanyu.a16.com/public/images/not-abimanyu.png
+lynx parikesit.abimanyu.a16.com/public/images/abimanyu-student.jpg
+lynx parikesit.abimanyu.a16.com/public/images/abimanyu.png
+lynx parikesit.abimanyu.a16.com/public/images/notabimanyujustmuseum.177013
+```
+
+
+
