@@ -412,8 +412,118 @@ Kemudian matikan bind server pada Yudhistira ```bash service bind9 stop``` dan a
 ## Soal 7
 Seperti yang kita tahu karena banyak sekali informasi yang harus diterima, buatlah subdomain khusus untuk perang yaitu baratayuda.abimanyu.yyy.com dengan alias www.baratayuda.abimanyu.yyy.com yang didelegasikan dari Yudhistira ke Werkudara dengan IP menuju ke Abimanyu dalam folder Baratayuda.
 
+Untuk melakukan Delegasi subdomain, kita memerlukan beberapa configurasi pada DNS Master dan DNS Slave. Kita juga meemerlukan beberapa modifikasi pada /etc/bind/named.conf.options
+
+**Yudhistira**
+
+![image](https://github.com/lunielism/yes/assets/93961310/1eb18d40-f2ce-4973-bd2b-21d99b45f600)
+
+```bash
+echo ';
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.a16.com. root.abimanyu.a16.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@               IN      NS      abimanyu.a16.com.
+@               IN      A       10.7.3.3       ; IP Abimanyu 
+www             IN      CNAME   abimanyu.a16.com.
+ns1             IN      A       10.7.2.2        ; IP Werkudara
+baratayuda      IN      NS      ns1
+parikesit       IN      A       10.7.3.3   ; IP Abimanyu
+@               IN      AAAA    ::1' > /etc/bind/arjuna/abimanyu.a16.com
+cp /root/named.conf.options /etc/bind/named.conf.options
+
+service bind9 restart
+```
+
+**Node Werkudara**
+
+![image](https://github.com/lunielism/yes/assets/93961310/3299610e-97fc-4c2a-822d-af5306ee8b6d)
+
+```bash
+ allow-query {any;};
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+```
+
+![image](https://github.com/lunielism/yes/assets/93961310/9faf2497-1167-42af-ba93-a0586a0240da)
+
+```bash
+zone "baratayuda.abimanyu.a16.com" {
+        type master;
+        file "/etc/bind/baratayuda/abimanyu.a16.com";
+        allow-transfer { 10.7.1.2; };
+};
+```
+
+```bash
+
+![image](https://github.com/lunielism/yes/assets/93961310/39b1679a-6df1-4a1d-9c10-d91220c8ca48)
+
+```bash
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     baratayuda.abimanyu.a16.com. root.baratayuda.abimanyu.a$
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      baratayuda.abimanyu.a16.com.
+@       IN      A       10.7.3.3       ; IP Abimanyu
+www     IN      CNAME   baratayuda.abimanyu.a16.com.
+rjp     IN      A       10.7.3.3        ; IP Abimanyu
+www.rjp IN      CNAME   rjp.baratayuda.abimanyu.a16.com.
+@       IN      AAAA    ::1
+```
+
+**Hasil**
+
+![image](https://github.com/lunielism/yes/assets/93961310/5b5ca465-2811-4970-858e-be24fe7511fa)
+
+
 ## Soal 8
 Untuk informasi yang lebih spesifik mengenai Ranjapan Baratayuda, buatlah subdomain melalui Werkudara dengan akses rjp.baratayuda.abimanyu.yyy.com dengan alias www.rjp.baratayuda.abimanyu.yyy.com yang mengarah ke Abimanyu.
+
+Karena kita sudah melakukan Delegasi subdomain, langkah selanjutnya adalah melakukan subdomain melalui Werkudara dengan perlu memerlukan beberapa konfigurasi pada DNS Master dan DNS Slave.
+
+**Node Werkudara
+
+![image](https://github.com/lunielism/yes/assets/93961310/ef99a618-04ec-4b02-b5db-c4888ebf65e6)
+
+```bash
+
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     baratayuda.abimanyu.a16.com. root.baratayuda.abimanyu.a$
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      baratayuda.abimanyu.a16.com.
+@       IN      A       10.7.3.3       ; IP Abimanyu
+www     IN      CNAME   baratayuda.abimanyu.a16.com.
+rjp     IN      A       10.7.3.3        ; IP Abimanyu
+www.rjp IN      CNAME   rjp.baratayuda.abimanyu.a16.com.
+@       IN      AAAA    ::1
+```
+
+**Hasil**
+![image](https://github.com/lunielism/yes/assets/93961310/77de6584-c2f9-4212-82ff-5a470cc9e6a7)
+
 
 ## Soal 9
 Arjuna merupakan suatu Load Balancer Nginx dengan tiga worker (yang juga menggunakan nginx sebagai webserver) yaitu Prabakusuma, Abimanyu, dan Wisanggeni. Lakukan deployment pada masing-masing worker.
