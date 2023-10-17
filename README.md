@@ -261,7 +261,7 @@ ping www.abimanyu.a16.com -c 5
 
 **Hasil**
 
-![image](https://github.com/lunielism/yes/assets/93961310/f4d68fe2-9ea2-4634-af8c-0346bf63c4b2)
+![image](https://github.com/lunielism/yes/assets/93961310/3a6120fb-0d4a-4c04-8e8f-77745217b072)
 
 ## Soal 4
 Kemudian, karena terdapat beberapa web yang harus di-deploy, buatlah subdomain parikesit.abimanyu.yyy.com yang diatur DNS-nya di Yudhistira dan mengarah ke Abimanyu.
@@ -303,7 +303,7 @@ ping parikesit.abimanyu.a16.com
 
 **Hasil**
 
-![image](https://github.com/lunielism/yes/assets/93961310/24b7a8cb-bed0-4b47-bfdc-a2596c0b89ab)
+![image](https://github.com/lunielism/yes/assets/93961310/11a860f7-9ca9-429e-80eb-1df587d71a55)
 
 ## Soal 5
 Buat juga reverse domain untuk domain utama. (Abimanyu saja yang direverse)
