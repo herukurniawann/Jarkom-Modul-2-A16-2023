@@ -14,7 +14,7 @@ Yudhistira akan digunakan sebagai DNS Master, Werkudara sebagai DNS Slave, Arjun
 **Penyelasaian Soal**
 Untuk membuat sebuah topologi yang diminta di soal, lakukan set up di GNS3 sampai muncul tampilan berikut
 
-![image](https://github.com/lunielism/yes/assets/93961310/37159adf-9d3c-4a8a-a623-f716bede812a)
+![image](https://github.com/herukurniawann/Jarkom-Modul-2-A16-2023/assets/93961310/a4053584-2009-4843-8184-35f95b4d0eaf)
 
 Kemudian salin alamat IP yang tertera yaitu 192.168.56.101 di browser google 
 kemudian akan terbuka tampilan dari GNS3 nya seperti gambar berikut : 
