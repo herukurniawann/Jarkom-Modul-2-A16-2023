@@ -527,11 +527,190 @@ www.rjp IN      CNAME   rjp.baratayuda.abimanyu.a16.com.
 ## Soal 9
 Arjuna merupakan suatu Load Balancer Nginx dengan tiga worker (yang juga menggunakan nginx sebagai webserver) yaitu Prabakusuma, Abimanyu, dan Wisanggeni. Lakukan deployment pada masing-masing worker.
 
+Cara Pengerjaan:
+
+1. Kami menjalankan script berikut untuk melakukan konfigurasi Load Balancer Nginx Arjuna:
+```bash
+#!/bin/bash
+
+# Konfigurasi Nginx
+echo 'upstream backend {
+  server 10.7.3.2;
+  server 10.7.3.3;
+  server 10.7.3.4;
+}
+
+server {
+  listen 80;
+  server_name arjuna.a16.com www.arjuna.a16.com;
+
+  location / {
+    proxy_pass http://backend;
+  }
+}
+' > /etc/nginx/sites-available/jarkom
+
+# Membuat symlink untuk konfigurasi Nginx
+ln -s /etc/nginx/sites-available/jarkom /etc/nginx/sites-enabled/jarkom
+
+# Menghapus konfigurasi default Nginx
+rm /etc/nginx/sites-enabled/default
+
+# Merestart layanan Nginx
+service nginx restart
+
+echo 'Selesai mengonfigurasi Nginx untuk arjuna.a16.com.'
+```
+2. Setelah mengkonfigurasi Arjuna, langkah selanjutnya adalah melakukan deployment pada masing-masing worker.
+Pada tiap worker yaitu Prabakusuma, Abimanyu, dan Wisanggeni dijalankan perintah shell sebagai berikut:
+```bash
+#!/bin/bash
+
+# Nyalakan layanan PHP-FPM
+service php7.0-fpm start
+
+# Konfigurasi Nginx untuk website
+echo 'server {
+    listen 80;
+
+    root /var/www/jarkom;
+    index index.php index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}' > /etc/nginx/sites-available/jarkom
+
+# Membuat symlink untuk konfigurasi Nginx
+ln -s /etc/nginx/sites-available/jarkom /etc/nginx/sites-enabled/jarkom
+
+# Hapus konfigurasi default Nginx
+rm /etc/nginx/sites-enabled/default
+
+# Restart layanan Nginx
+service nginx restart
+
+echo 'Selesai mengonfigurasi Nginx dan PHP-FPM.'
+```
+
+3. Untuk memastikan bahwa load balancer berfungsi dengan baik, kami melakukan beberapa test pada salah satu client yaitu Nakula:
+```bash
+lynx http://10.7.3.2
+lynx http://10.7.3.3
+lynx http://10.7.3.4
+lynx http://10.7.3.5
+lynx http://arjuna.a16.com
+```
+
 ## Soal 10
 Kemudian gunakan algoritma Round Robin untuk Load Balancer pada Arjuna. Gunakan server_name pada soal nomor 1. Untuk melakukan pengecekan akses alamat web tersebut kemudian pastikan worker yang digunakan untuk menangani permintaan akan berganti ganti secara acak. Untuk webserver di masing-masing worker wajib berjalan di port 8001-8003. Contoh
     - Prabakusuma:8001
     - Abimanyu:8002
     - Wisanggeni:8003
+
+### Cara Pengerjaan
+#### Langkah 1: Konfigurasi Arjuna
+
+1. Pastikan konfigurasi Arjuna yang benar telah selesai. Kami menggunakan algoritma Round Robin untuk mendistribusikan lalu lintas web secara merata ke setiap worker yang tersedia.
+
+```bash
+#!/bin/bash
+
+# Konfigurasi DNS Abimanyu
+echo '
+; BIND data file for local loopback interface
+;
+$TTL 604800
+@   IN  SOA abimanyu.a16.com. root.abimanyu.a16.com. (
+    2       ; Serial
+    604800  ; Refresh
+    86400   ; Retry
+    2419200 ; Expire
+    604800  ; Negative Cache TTL
+)
+@   IN  NS  abimanyu.a16.com.
+@   IN  A   10.7.3.3
+www IN  CNAME abimanyu.a16.com
+parikesit IN A 10.7.3.3
+ns1 IN A 10.7.2.2
+baratayuda IN NS ns1
+' > /etc/bind/jarkom/abimanyu.a16.com
+
+# Restart Bind9
+service bind9 restart
+
+# Konfigurasi Apache Abimanyu
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/abimanyu.a16.com.conf
+
+rm /etc/apache2/sites-available/000-default.conf
+
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/abimanyu.a16
+
+  ServerName abimanyu.a16.com
+  ServerAlias www.abimanyu.a16.com
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/abimanyu.a16.com.conf
+
+a2ensite abimanyu.a16.com.conf
+
+# Restart Apache2
+service apache2 restart
+
+```
+#### Langkah 2: Deployment
+Setelah mengkonfigurasi Arjuna, langkah selanjutnya adalah melakukan deployment pada masing-masing worker. Pastikan setiap worker telah diatur dengan benar dan siap melayani lalu lintas web.
+```bash
+# Contoh konfigurasi web server untuk PrabuKusuma (port 8001)
+server {
+  listen 8001;
+
+  root /var/www/jarkom;
+  index index.php index.html index.htm index.nginx-debian.html;
+
+  server_name _;
+
+  location / {
+    try_files $uri $uri/ /index.php?$query_string;
+  }
+
+  location ~ \.php$ {
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+  }
+
+  location ~ /\.ht {
+    deny all;
+  }
+}
+
+```
+
+#### Langkah 3: Uji Load Balancer
+
+Untuk memastikan bahwa load balancer berfungsi dengan baik, lakukan beberapa tes dari client (Sadewa / Nakula). Gunakan perintah berikut:
+
+```bash
+lynx http://10.7.3.2
+lynx http://10.7.3.3
+lynx http://10.7.3.4
+lynx http://10.7.3.5
+lynx http://arjuna.a16.com
+
 
 ## Soal 11
 Selain menggunakan Nginx, lakukan konfigurasi Apache Web Server pada worker Abimanyu dengan web server www.abimanyu.yyy.com. Pertama dibutuhkan web server dengan DocumentRoot pada /var/www/abimanyu.yyy
