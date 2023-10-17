@@ -349,6 +349,66 @@ host -t PTR 10.7.1.2
 ## Soal 6
 Agar dapat tetap dihubungi ketika DNS Server Yudhistira bermasalah, buat juga Werkudara sebagai DNS Slave untuk domain utama.
 
+Untuk mengerjakan DNS Slave, kita memerlukan beberapa konfigurasi pada DNS Master dan DNS Slave (Werkudara)
+
+**Node Yudhistira**
+![image](https://github.com/lunielism/yes/assets/93961310/a0aa9e1e-3277-4a90-b4f2-afc70f1b9bf0)
+
+```bash
+echo 'zone "arjuna.a16.com"{  
+        type master;
+        also-notify { 10.7.2.2; };
+        allow-transfer { 10.7.2.2; };
+        file "/etc/bind/arjuna/arjuna.a16.com";
+};
+zone "abimanyu.a16.com"{  
+        type master;
+        also-notify { 10.7.2.2; };
+        allow-transfer { 10.7.2.2; };
+        file "/etc/bind/arjuna/abimanyu.a16.com";
+};
+
+zone "3.7.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/arjuna/3.7.10.in-addr.arpa";
+};' > /etc/bind/named.conf.local
+
+service bind9 restart
+```
+**Node Werkudara**
+
+![image](https://github.com/lunielism/yes/assets/93961310/98f2e477-02d6-4cb6-a5cd-60f0f465630c)
+
+```bash
+zone "arjuna.a16.com" {
+    type slave;
+    masters { 10.7.1.2; };
+    file "/var/lib/bind/arjuna/a16.com";
+};
+zone "abimanyu.a16.com" {
+    type slave;
+    masters { 10.7.1.2; };
+    file "/var/lib/bind/abimanyu/a16.com";
+};
+```
+
+**Node Nakula**
+![image](https://github.com/lunielism/yes/assets/93961310/474f1247-564f-4d79-a4b5-ca02e339f377)
+
+```bash
+nameserver 10.7.1.2
+nameserver 10.7.2.2
+```
+Kemudian matikan bind server pada Yudhistira ```bash service bind9 stop``` dan aktifkan bind server pada Werkudara  ```bash service bind9 restart```, setelah itu lakukan ping di node nakula.
+
+![image](https://github.com/lunielism/yes/assets/93961310/45532069-a5de-40ef-8505-fd6a664ea314)
+
+![image](https://github.com/lunielism/yes/assets/93961310/48a563d2-75ec-4a73-a340-2f5ff347f5c1)
+
+**Hasil**
+
+![image](https://github.com/lunielism/yes/assets/93961310/7132f8fe-721a-4da1-a859-d6c9ec6fbaef)
+
 ## Soal 7
 Seperti yang kita tahu karena banyak sekali informasi yang harus diterima, buatlah subdomain khusus untuk perang yaitu baratayuda.abimanyu.yyy.com dengan alias www.baratayuda.abimanyu.yyy.com yang didelegasikan dari Yudhistira ke Werkudara dengan IP menuju ke Abimanyu dalam folder Baratayuda.
 
