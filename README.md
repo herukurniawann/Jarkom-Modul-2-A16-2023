@@ -798,9 +798,66 @@ lynx abimanyu.a16.com
 ## Soal 12
 Setelah itu ubahlah agar url www.abimanyu.yyy.com/index.php/home menjadi www.abimanyu.yyy.com/home.
 
+#### Langkah 1: Konfigurasi Apache - Abimanyu
+
+1. Jalankan script berikut di server Abimanyu untuk mengubah konfigurasi Apache:
+
+   ```bash
+   # Konfigurasi Apache untuk Abimanyu dengan URL yang diubah
+   echo -e '<VirtualHost *:80>
+     ServerAdmin webmaster@localhost
+     DocumentRoot /var/www/abimanyu.a16
+     ServerName abimanyu.a16.com
+     ServerAlias www.abimanyu.a16.com
+
+     <Directory /var/www/abimanyu.a16/index.php/home>
+       Options +Indexes
+     </Directory>
+
+     Alias "/home" "/var/www/abimanyu.a16/index.php/home"
+
+     ErrorLog ${APACHE_LOG_DIR}/error.log
+     CustomLog ${APACHE_LOG_DIR}/access.log combined
+   </VirtualHost>' > /etc/apache2/sites-available/abimanyu.a16.com.conf
+
+   service apache2 restart
+   ```
+
+#### Langkah 2: Uji Situs Web
+   ```bash
+lynx abimanyu.a16.com/home
+curl abimanyu.a16.com/home
+   ```
+
 ## Soal 13
 Selain itu, pada subdomain www.parikesit.abimanyu.yyy.com, DocumentRoot disimpan pada /var/www/parikesit.abimanyu.yyy
 
+#### Langkah 1: Konfigurasi Apache - Abimanyu
+
+Jalankan script berikut di server Abimanyu untuk menambahkan konfigurasi subdomain:
+
+   ```bash
+   # Konfigurasi Apache untuk subdomain parikesit.abimanyu.yyy.com
+   echo -e '<VirtualHost *:80>
+     ServerAdmin webmaster@localhost
+     DocumentRoot /var/www/parikesit.abimanyu.a16
+     ServerName parikesit.abimanyu.a16.com
+     ServerAlias www.parikesit.abimanyu.a16.com
+
+     ErrorLog ${APACHE_LOG_DIR}/error.log
+     CustomLog ${APACHE_LOG_DIR}/access.log combined
+   </VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.a16.com.conf
+
+   a2ensite parikesit.abimanyu.a16.com.conf
+   service apache2 restart
+```
+
+#### Langkah 2: Konfigurasi Apache - Abimanyu
+Untuk mengjui subdomain, kami menggunakna perintah beriut di client nakula:
+```bash
+lynx parikesit.abimanyu.a16.com
+lynx parikesit.abimanyu.a16.com
+```
 ## Soal 14
 Pada subdomain tersebut folder /public hanya dapat melakukan directory listing sedangkan pada folder /secret tidak dapat diakses (403 Forbidden).
 
