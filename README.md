@@ -406,8 +406,7 @@ Kemudian matikan bind server pada Yudhistira ```bash service bind9 stop``` dan a
 ![image](https://github.com/lunielism/yes/assets/93961310/48a563d2-75ec-4a73-a340-2f5ff347f5c1)
 
 **Hasil**
-
-![image](https://github.com/lunielism/yes/assets/93961310/7132f8fe-721a-4da1-a859-d6c9ec6fbaef)
+masih error
 
 ## Soal 7
 Seperti yang kita tahu karena banyak sekali informasi yang harus diterima, buatlah subdomain khusus untuk perang yaitu baratayuda.abimanyu.yyy.com dengan alias www.baratayuda.abimanyu.yyy.com yang didelegasikan dari Yudhistira ke Werkudara dengan IP menuju ke Abimanyu dalam folder Baratayuda.
