@@ -1167,7 +1167,7 @@ lynx parikesit.abimanyu.a16.com/public/images/abimanyu.png
 lynx parikesit.abimanyu.a16.com/public/images/notabimanyujustmuseum.177013
 ```
 
-**Kendala**
+**Kendala Selama Praktikkum**
 1. Untuk soal no 6 sering tidak bisa jalan waktu run
 2. Untuk no 9 terkadang bisa di run, terkadang tidak bisa
 3.  Untuk no 10 terkadang bisa di run, terkadang tidak bisa
